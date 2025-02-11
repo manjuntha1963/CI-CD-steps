@@ -1,0 +1,118 @@
+### **Step 1: Install SonarQube on the Jenkins Server**
+
+# Update system packages
+sudo apt update && sudo apt upgrade -y
+
+# Install OpenJDK 17 (required for SonarQube)
+sudo apt install openjdk-17-jdk -y
+
+# Add SonarQube user
+sudo useradd -m -d /opt/sonarqube -s /bin/bash sonar
+sudo passwd sonar
+
+# Switch to SonarQube user
+su - sonar
+
+# Download SonarQube (Community Edition)
+SONAR_VERSION="10.2.1.7915"
+wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-${SONAR_VERSION}.zip
+
+# Install unzip if not installed
+sudo apt install unzip -y
+
+# Extract SonarQube
+unzip sonarqube-${SONAR_VERSION}.zip
+mv sonarqube-${SONAR_VERSION} sonarqube
+exit
+
+# Configure systemd service
+sudo tee /etc/systemd/system/sonarqube.service > /dev/null <<EOF
+[Unit]
+Description=SonarQube service
+After=syslog.target network.target
+
+[Service]
+Type=forking
+ExecStart=/opt/sonarqube/sonarqube/bin/linux-x86-64/sonar.sh start
+ExecStop=/opt/sonarqube/sonarqube/bin/linux-x86-64/sonar.sh stop
+User=sonar
+Group=sonar
+Restart=always
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+
+
+# Reload systemd and enable SonarQube service
+sudo systemctl daemon-reload
+sudo systemctl enable sonarqube
+sudo systemctl start sonarqube
+
+# Check SonarQube status
+sudo systemctl status sonarqube
+
+### **Step 2: Access SonarQube UI**
+
+- Open a web browser and go to: `http://<JENKINS_SERVER_IP>:9000`
+- Default login:
+  - **Username**: `admin`
+  - **Password**: `admin`
+- Change the default password.
+
+
+### **Step 3: Integrate SonarQube with Jenkins**
+
+- Go to **Jenkins → Manage Jenkins → Global Tool Configuration**.
+- Configure **SonarQube Scanner** with:
+
+  - Name: SonarQube
+  - Installation directory: /opt/sonarqube
+
+
+
+## **2. Install and Configure Trivy**
+
+
+### **Step 1: Install Trivy**
+
+sudo apt install wget apt-transport-https gnupg -y
+wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+echo "deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -cs) main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
+sudo apt update && sudo apt install trivy -y
+
+
+### **Step 2: Test Trivy Installation**
+
+trivy --version
+
+---
+
+## **3. Install and Configure OWASP Dependency-Check**
+
+### **Step 1: Install OWASP Dependency-Check**
+
+mkdir ~/dependency-check && cd ~/dependency-check
+wget https://github.com/jeremylong/DependencyCheck/releases/download/v8.4.0/dependency-check-8.4.0-release.zip
+unzip dependency-check-8.4.0-release.zip
+
+
+### **Step 2: Test OWASP Dependency-Check**
+
+~/dependency-check/dependency-check/bin/dependency-check.sh --version
+
+
+### **Step 3: Scan Your Application**
+
+~/dependency-check/dependency-check/bin/dependency-check.sh --project "MyProject" --scan /path/to/your/application
+
+
+### **Step 4: Integrate OWASP Dependency-Check into Jenkins**
+
+- In **Global Tool Configuration**, configure:
+
+  - Name: DependencyCheck
+  - Path: /home/jenkins/dependency-check
+
