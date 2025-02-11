@@ -1,0 +1,50 @@
+### Install Chocolatey to Install Terraform on Windows Server
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+choco install terraform -y
+
+terraform -version
+
+
+## Build a Spring Boot Application Locally on Ubuntu Server
+curl https://start.spring.io/starter.tgz -d dependencies=web -d type=maven-project -d javaVersion=17 | tar -xzvf -
+
+
+### Build the Application
+mvn clean package
+
+
+### Run the Application
+java -jar target/demo-0.0.1-SNAPSHOT.jar
+
+
+#### Generate an SSH Key (if not already created)
+ssh-keygen -t rsa -b 4096 -C "manjuntha1963@gmail.com"
+
+
+#### Add the SSH Key to the SSH Agent
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+
+
+#### Copy the Public Key
+cat ~/.ssh/id_rsa.pub
+
+
+#### Add the SSH Key to GitHub
+- Go to [GitHub SSH Settings](https://github.com/settings/keys).
+- Click **New SSH Key**.
+- Paste the copied key and save.
+
+
+#### Test the Connection
+ssh -T git@github.com
+
+
+#### Push to GitHub Using SSH
+
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+
