@@ -55,7 +55,7 @@ unzip dependency-check-8.4.0-release.zip
 
 ### **Step 3: Scan Your Application**
 
-~/dependency-check/dependency-check/bin/dependency-check.sh --project "MyProject" --scan /home/user/myproject
+~/dependency-check/dependency-check/bin/dependency-check.sh --project "MyProject" --scan /home/ubuntu/dependency-check/
 
 
 ### **Step 4: Integrate OWASP Dependency-Check into Jenkins**
@@ -63,5 +63,5 @@ unzip dependency-check-8.4.0-release.zip
 - In **Global Tool Configuration**, configure:
 
   - Name: DependencyCheck
-  - Path: /home/jenkins/dependency-check
+  - Path: /home/ubuntu/dependency-check
 
