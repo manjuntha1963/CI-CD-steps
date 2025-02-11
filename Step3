@@ -1,6 +1,5 @@
 
 ## **1️⃣ Install Prometheus and Grafana on EKS**
-We'll use **Helm** to deploy **Prometheus** and **Grafana**.
 
 ### **Step 1: Install Helm (if not installed)**
 
@@ -19,12 +18,6 @@ helm repo update
 
 helm install monitoring prometheus-community/kube-prometheus-stack --namespace monitoring --create-namespace
 
-This installs:
-- **Prometheus**
-- **Grafana**
-- **Alertmanager**
-- **Node Exporter**
-- **Kube State Metrics**
 
 ### **Step 4: Verify Installation**
 
@@ -37,21 +30,18 @@ kubectl get svc -n monitoring
 ### **Step 1: Edit the Grafana Service**
 
 kubectl edit svc monitoring-grafana -n monitoring
+kubectl edit svc monitoring-kube-prometheus-prometheus -n monitoring
 
 Change:
-```yaml
+
 spec:
   type: LoadBalancer
-```
+
 Save and exit.
 
 ### **Step 2: Get the LoadBalancer URL**
 
 kubectl get svc monitoring-grafana -n monitoring
-
-Look for the **EXTERNAL-IP** and access Grafana at:
-
-http://<EXTERNAL-IP>:3000
 
 
 ## **3️⃣ Access Prometheus and Grafana**
@@ -62,19 +52,14 @@ kubectl get secret --namespace monitoring monitoring-grafana -o jsonpath="{.data
 - **Username**: `admin`
 - **Password**: *(from the command above)*
 
-### **🔹 Access Prometheus**
-
-kubectl port-forward svc/monitoring-prometheus 9090 -n monitoring
-
-Visit: [http://localhost:9090](http://localhost:9090)
-
 
 ## **4️⃣ Configure Dashboards in Grafana**
-1. **Login to Grafana** at `http://<EXTERNAL-IP>:3000`
+
+
 2. **Add a Data Source**:
    - Click **"Configuration" → "Data Sources"**.
    - Select **Prometheus**.
-   - Set **URL** to `http://monitoring-prometheus.monitoring.svc.cluster.local:9090`
+   - Set **URL** to `http://a548a4f88cf8d48a7b6e4a2944d71031-482906267.us-east-1.elb.amazonaws.com:9090`
    - Click **"Save & Test"**.
 
 3. **Import Pre-built Dashboards**:
