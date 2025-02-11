@@ -1,6 +1,6 @@
 ### **Step 1: Install SonarQube on the Jenkins Server**
 
-docker run --name sonarqube-custom -p 9000:9000 sonarqube:community
+docker run --name sonarqube-custom -dp 9000:9000 sonarqube:community
 
 
 ### **Step 2: Access SonarQube UI**
