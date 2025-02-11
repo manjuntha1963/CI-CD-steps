@@ -43,6 +43,7 @@ resource "aws_instance" "jenkins_server" {
     sudo usermod -aG docker jenkins
     sudo chmod 666 /var/run/docker.sock
     sudo systemctl restart jenkins  # Ensure Jenkins recognizes Docker permissions
+    sudo cat /var/lib/jenkins/secrets/initialAdminPassword
   EOF
 
   tags = {
