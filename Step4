@@ -1,17 +1,7 @@
 ### **Jenkins Pipeline for CI/CD: GitHub → Jenkins → SonarQube → Trivy → Docker Hub → EKS**  
 
-This pipeline will:  
-✅ **Clone the Spring Boot application** from GitHub  
-✅ **Build the application using Maven**  
-✅ **Run SonarQube analysis** for code quality  
-✅ **Build a Docker image and push it to Docker Hub**  
-✅ **Scan the Docker image using Trivy**  
-✅ **Deploy the application to Amazon EKS**  
-
----
-
-## **🔹 Prerequisites**  
 ### **Jenkins Setup**
+
 1. **Install required plugins** in Jenkins:  
    - Git  
    - Docker Pipeline  
@@ -27,7 +17,7 @@ This pipeline will:
 ---
 
 ## **🔹 Jenkinsfile**
-```groovy
+
 pipeline {
     agent any
 
@@ -38,9 +28,9 @@ pipeline {
         SONARQUBE_TOKEN = credentials('sonarqube-token')
         DOCKERHUB_USER = credentials('dockerhub-credentials').username
         DOCKERHUB_PASS = credentials('dockerhub-credentials').password
-        IMAGE_NAME = "your-dockerhub-username/springboot-app"
+        IMAGE_NAME = "manjuntha1963/springboot-app"
         AWS_REGION = "us-east-1"
-        K8S_DEPLOYMENT_FILE = "k8s/deployment.yaml"
+        K8S_DEPLOYMENT_FILE = "deployment.yaml"
     }
 
     stages {
@@ -113,42 +103,11 @@ pipeline {
         }
     }
 }
-```
 
----
-
-## **🔹 Explanation**
-### **1️⃣ GitHub Integration**
-- The pipeline pulls the latest code from GitHub (`main` branch).  
-- Requires Jenkins to have Git installed (`git` plugin).  
-
-### **2️⃣ Build Spring Boot Application**
-- Uses **Maven** to compile the application (`mvn clean package`).  
-- Skips tests (`-DskipTests`) but can enable them.  
-
-### **3️⃣ SonarQube Code Quality Check**
-- Runs **SonarQube scan** to check code quality.  
-- Requires **SonarQube plugin** in Jenkins.  
-
-### **4️⃣ Docker Image Build**
-- Builds a Docker image using the `Dockerfile`.  
-
-### **5️⃣ Trivy Image Security Scan**
-- Runs a **Trivy scan** to check vulnerabilities in the Docker image.  
-- Scans for `HIGH` and `CRITICAL` security issues.  
-
-### **6️⃣ Push Docker Image to Docker Hub**
-- Logs in to **Docker Hub** and pushes the image.  
-
-### **7️⃣ Deploy to Kubernetes (EKS)**
-- Uses **kubectl** to deploy the application on **EKS**.  
-- Reads the Kubernetes YAML file (`k8s/deployment.yaml`).  
-
----
 
 ## **🔹 Kubernetes Deployment YAML (Example)**
-Create a `k8s/deployment.yaml` file:
-```yaml
+
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -165,7 +124,7 @@ spec:
     spec:
       containers:
         - name: springboot-app
-          image: your-dockerhub-username/springboot-app:latest
+          image: manjuntha1963/springboot-app:latest
           ports:
             - containerPort: 8080
 ---
@@ -181,14 +140,4 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 8080
-```
 
----
-
-## **🔹 How to Run the Pipeline?**
-1. **Go to Jenkins → New Item → Pipeline**  
-2. Select **Pipeline Script from SCM**  
-3. Enter your **GitHub repository URL**  
-4. Click **Save** and **Build Now** 🚀  
-
----
