@@ -1,58 +1,7 @@
 ### **Step 1: Install SonarQube on the Jenkins Server**
 
-# Update system packages
-sudo apt update && sudo apt upgrade -y
+docker run --name sonarqube-custom -p 9000:9000 sonarqube:community
 
-# Install OpenJDK 17 (required for SonarQube)
-sudo apt install openjdk-17-jdk -y
-
-# Add SonarQube user
-sudo useradd -m -d /opt/sonarqube -s /bin/bash sonar
-sudo passwd sonar
-
-# Switch to SonarQube user
-su - sonar
-
-# Download SonarQube (Community Edition)
-SONAR_VERSION="10.2.1.7915"
-wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-${SONAR_VERSION}.zip
-
-# Install unzip if not installed
-sudo apt install unzip -y
-
-# Extract SonarQube
-unzip sonarqube-${SONAR_VERSION}.zip
-mv sonarqube-${SONAR_VERSION} sonarqube
-exit
-
-# Configure systemd service
-sudo tee /etc/systemd/system/sonarqube.service > /dev/null <<EOF
-[Unit]
-Description=SonarQube service
-After=syslog.target network.target
-
-[Service]
-Type=forking
-ExecStart=/opt/sonarqube/sonarqube/bin/linux-x86-64/sonar.sh start
-ExecStop=/opt/sonarqube/sonarqube/bin/linux-x86-64/sonar.sh stop
-User=sonar
-Group=sonar
-Restart=always
-LimitNOFILE=65536
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-
-
-# Reload systemd and enable SonarQube service
-sudo systemctl daemon-reload
-sudo systemctl enable sonarqube
-sudo systemctl start sonarqube
-
-# Check SonarQube status
-sudo systemctl status sonarqube
 
 ### **Step 2: Access SonarQube UI**
 
