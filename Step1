@@ -9,7 +9,6 @@ resource "aws_instance" "jenkins_server" {
 
   user_data = <<-EOF
     #!/bin/bash
-    set -e  # Exit script if any command fails
 
     # Update and Upgrade System
     sudo apt update -y && sudo apt upgrade -y
