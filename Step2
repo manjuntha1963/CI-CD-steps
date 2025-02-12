@@ -5,6 +5,8 @@
    - Docker Pipeline  
    - Pipeline: AWS Steps  
    - SonarQube Scanner  
+     Maven Integration
+     Pipeline: Stage View
 
 
 
