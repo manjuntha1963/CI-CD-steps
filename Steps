@@ -13,6 +13,10 @@ cd springboot
 
 curl https://start.spring.io/starter.tgz -d dependencies=web -d type=maven-project -d javaVersion=17 | tar -xzvf -
 
+sudo apt update
+sudo apt install openjdk-17-jdk -y
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+
 
 ### Build the Application
 mvn clean package
