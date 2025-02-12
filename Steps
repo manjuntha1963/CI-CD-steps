@@ -51,6 +51,9 @@ ssh -T git@github.com
 
 #### Push to GitHub Using SSH
 
+git config --global user.name "manjuntha1963"
+git config --global user.email "manjuntha1963@gmail.com"
+
 git init
 git add .
 git commit -m "Initial commit"
