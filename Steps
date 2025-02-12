@@ -64,3 +64,58 @@ git branch -M main
 git remote add origin https://github.com/manjuntha1963/tests.git
 git push -u origin main
 
+
+
+
+
+### **Integrating GitHub Webhooks with Jenkins**  
+
+
+## **Step 3: Configure GitHub Credentials in Jenkins**  
+
+1. Go to **Jenkins Dashboard** → **Manage Jenkins** → **Manage Credentials**.  
+
+2. Select **(Global)** under Stores scoped to Jenkins.  
+
+3. Click **Add Credentials** → Choose **Secret Text**.  
+
+4. Paste the GitHub PAT and give it an ID (e.g., `github-token`).  
+
+
+
+## **Step 5: Setup Webhook in GitHub Repository**  
+
+1. Go to your GitHub repository → **Settings** → **Webhooks**.  
+
+2. Click **Add webhook**. 
+
+3. In **Payload URL**, enter your Jenkins GitHub webhook URL:  
+
+   http://3.95.38.28:8080/github-webhook/
+
+   Replace `your-jenkins-server` with your actual server's IP or domain.  
+
+4. Set **Content type** to `application/json`.  
+
+5. Choose **Just the push event**.  
+
+6. Click **Add webhook**.  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
