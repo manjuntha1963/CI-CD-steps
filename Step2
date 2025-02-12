@@ -1,3 +1,13 @@
+### **Jenkins Setup**
+
+1. **Install required plugins** in Jenkins:  
+   - Git  
+   - Docker Pipeline  
+   - Pipeline: AWS Steps  
+   - SonarQube Scanner  
+
+
+
 ### **Step 1: Install SonarQube on the Jenkins Server**
 
 docker run --name sonarqube-custom -dp 9000:9000 sonarqube:community
