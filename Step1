@@ -8,6 +8,12 @@ resource "aws_instance" "jenkins_server" {
   key_name      = "bastion"
   iam_instance_profile = "ec2"
 
+  root_block_device {
+    volume_size           = 50  # Set the root volume size to 50GB
+    volume_type           = "gp3"  # Use General Purpose SSD (gp3), or change to "gp2"
+    delete_on_termination = true  # Automatically delete volume when instance is terminated
+  }
+
   user_data = <<-EOF
     #!/bin/bash
 
