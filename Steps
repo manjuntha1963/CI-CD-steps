@@ -7,6 +7,10 @@ terraform -version
 
 
 ## Build a Spring Boot Application Locally on Ubuntu Server
+
+mkdir springboot
+cd springboot
+
 curl https://start.spring.io/starter.tgz -d dependencies=web -d type=maven-project -d javaVersion=17 | tar -xzvf -
 
 
