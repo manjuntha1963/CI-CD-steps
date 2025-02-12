@@ -1,14 +1,6 @@
 ### **Jenkins Pipeline for CI/CD: GitHub → Jenkins → SonarQube → Trivy → Docker Hub → EKS**  
 
-### **Jenkins Setup**
-
-1. **Install required plugins** in Jenkins:  
-   - Git  
-   - Docker Pipeline  
-   - Pipeline: AWS Steps  
-   - SonarQube Scanner  
-
-2. **Configure credentials in Jenkins**:  
+1. **Configure credentials in Jenkins**:  
    - GitHub **(Personal Access Token)** → **ID: github-credentials**  
    - SonarQube **(Token)** → **ID: sonarqube-token**  
    - Docker Hub **(Username & Password)** → **ID: dockerhub-credentials**  
