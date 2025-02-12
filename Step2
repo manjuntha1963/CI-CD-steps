@@ -1,12 +1,15 @@
 ### **Jenkins Setup**
 
 1. **Install required plugins** in Jenkins:  
-   - Git  
-   - Docker Pipeline  
-   - Pipeline: AWS Steps  
-   - SonarQube Scanner  
+     Git  
+     GitHub 
+     GitHub Integration
+     Docker Pipeline  
+     Pipeline: AWS Steps  
+     SonarQube Scanner  
      Maven Integration
      Pipeline: Stage View
+
 
 
 
