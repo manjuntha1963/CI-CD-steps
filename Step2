@@ -8,32 +8,6 @@
      Maven Integration
      Pipeline: Stage View
 
-### **Step 1: Install OWASP Dependency-Check**
-
-mkdir ~/dependency-check && cd ~/dependency-check
-wget https://github.com/jeremylong/DependencyCheck/releases/download/v8.4.0/dependency-check-8.4.0-release.zip
-unzip dependency-check-8.4.0-release.zip
-
-
-### **Step 2: Test OWASP Dependency-Check**
-
-~/dependency-check/dependency-check/bin/dependency-check.sh --version
-
-
-### **Step 3: Scan Your Application**
-
-~/dependency-check/dependency-check/bin/dependency-check.sh --project "MyProject" --scan /home/ubuntu/dependency-check/
-
-
-### **Step 4: Integrate OWASP Dependency-Check into Jenkins**
-
-- In **Global Tool Configuration**, configure:
-
-  - Name: DependencyCheck
-  - Path: /home/ubuntu/dependency-check
-
-
-
 
 ## **2. Configure Docker Hub in Jenkins**
 
@@ -43,7 +17,7 @@ unzip dependency-check-8.4.0-release.zip
 3. Choose **Username & Password**.
    - **ID**: `docker-hub-credentials`
    - **Username**: `manjuntha1963`
-   - **Password**: `dckr_pat_0LyIgKfjewbOABaPUc9JiXn9AKk`
+   - **Password**: ` -------------`
 4. Click **Save**.
 
 
