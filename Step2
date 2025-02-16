@@ -11,13 +11,6 @@
      Pipeline: Stage View
 
 
-
-
-### **Step 1: Install SonarQube on the Jenkins Server**
-
-docker run --name sonarqube-custom -dp 9000:9000 sonarqube:community
-
-
 ### **Step 2: Access SonarQube UI**
 
 - Open a web browser and go to: `http://<JENKINS_SERVER_IP>:9000`
@@ -25,36 +18,6 @@ docker run --name sonarqube-custom -dp 9000:9000 sonarqube:community
   - **Username**: `admin`
   - **Password**: `admin`
 - Change the default password.
-
-
-### **Step 3: Integrate SonarQube with Jenkins**
-
-- Go to **Jenkins → Manage Jenkins → Global Tool Configuration**.
-- Configure **SonarQube Scanner** with:
-
-  - Name: SonarQube
-  - Installation directory: /opt/sonarqube
-
-
-
-## **2. Install and Configure Trivy**
-
-
-### **Step 1: Install Trivy**
-
-sudo apt install wget apt-transport-https gnupg -y
-wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
-echo "deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -cs) main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
-sudo apt update && sudo apt install trivy -y
-
-
-### **Step 2: Test Trivy Installation**
-
-trivy --version
-
----
-
-## **3. Install and Configure OWASP Dependency-Check**
 
 ### **Step 1: Install OWASP Dependency-Check**
 
