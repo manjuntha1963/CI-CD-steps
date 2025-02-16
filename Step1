@@ -73,6 +73,11 @@ resource "aws_instance" "jenkins_server" {
     sudo chmod 666 /var/run/docker.sock
     sudo systemctl restart jenkins  # Ensure Jenkins recognizes Docker permissions
     sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+    # Sonarqube instal
+    docker run --name sonarqube-custom -dp 9000:9000 sonarqube:community
+
+    
   EOF
 
   tags = {
