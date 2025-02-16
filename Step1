@@ -49,6 +49,11 @@ resource "aws_instance" "jenkins_server" {
     sudo mv eksctl /usr/local/bin
     sudo chmod +x /usr/local/bin/eksctl
 
+    ### **Step 1: Install Helm (if not installed)**
+    curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+    chmod +x get_helm.sh
+    ./get_helm.sh
+
     # Install Jenkins
     # Add the Jenkins repository key
     curl -fsSL https://pkg.jenkins.io/debian/jenkins.io-2023.key | sudo tee \
