@@ -52,11 +52,14 @@ resource "aws_instance" "jenkins_server" {
     sudo chmod +x /usr/local/bin/eksctl
 
     # Install Jenkins
-    curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
-    echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/" | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
-    sudo apt update
-    sudo apt install -y fontconfig openjdk-17-jre
-    sudo apt install -y jenkins
+    # Add the Jenkins repository key
+    curl -fsSL https://pkg.jenkins.io/debian/jenkins.io-2023.key | sudo tee \
+    /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+    echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+    https://pkg.jenkins.io/debian binary/" | sudo tee \
+    /etc/apt/sources.list.d/jenkins.list > /dev/null
+    sudo apt update && sudo apt install jenkins -y
+    sudo systemctl enable --now jenkins
 
     ### **Step 1: Install Trivy**
     sudo apt install wget apt-transport-https gnupg -y
