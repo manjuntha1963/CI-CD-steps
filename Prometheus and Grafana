@@ -1,4 +1,7 @@
 ## **3️⃣ Access Prometheus and Grafana**
+
+kubectl get all --namespace monitoring
+
 ### **🔹 Get Grafana Credentials**
 
 kubectl get secret --namespace monitoring monitoring-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
