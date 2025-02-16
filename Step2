@@ -42,34 +42,26 @@ unzip dependency-check-8.4.0-release.zip
 2. Select **Global credentials** → **Add credentials**.
 3. Choose **Username & Password**.
    - **ID**: `docker-hub-credentials`
-   - **Username**: `<your-dockerhub-username>`
-   - **Password**: `<your-dockerhub-password>`
+   - **Username**: `manjuntha1963`
+   - **Password**: `dckr_pat_0LyIgKfjewbOABaPUc9JiXn9AKk`
 4. Click **Save**.
 
-
-
-## **2. Configure GitHub Integration**
-### **Step 1: Add GitHub Credentials**
-1. **Go to**: Jenkins Dashboard → **Manage Jenkins** → **Manage Credentials**.
-2. Select **Global credentials** → **Add credentials**.
-3. Choose **Username with password** or **Personal Access Token** for GitHub.
 
 
 ### **Step 2: Configure GitHub Webhook**
 1. Go to your **GitHub repository** → **Settings** → **Webhooks**.
 2. Click **"Add webhook"** and enter:
-   - **Payload URL**: `http://<JENKINS_URL>/github-webhook/`
+   - **Payload URL**: `http://54.165.163.214:8080/github-webhook/`
    - **Content type**: `application/json`
    - **Events**: Select "Just the push event".
 
 
-
 ### **Step 2: Configure SonarQube in Jenkins**
+
 1. **Go to**: Jenkins Dashboard → **Manage Jenkins** → **Global Tool Configuration**.
-2. Find **SonarQube Scanner** → **Add SonarQube Installation**.
-3. Set:
+
    - **Name**: `SonarQube`
-   - **Server URL**: `http://localhost:9000`
+   - **Server URL**: `http://54.165.163.214:9000`
    - **Authentication Token**: (Generate in SonarQube UI)
 
 
