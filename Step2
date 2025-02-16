@@ -1,23 +1,12 @@
 ### **Jenkins Setup**
 
 1. **Install required plugins** in Jenkins:  
-     Git  
-     GitHub 
      GitHub Integration
      Docker Pipeline  
      Pipeline: AWS Steps  
      SonarQube Scanner  
      Maven Integration
      Pipeline: Stage View
-
-
-### **Step 2: Access SonarQube UI**
-
-- Open a web browser and go to: `http://<JENKINS_SERVER_IP>:9000`
-- Default login:
-  - **Username**: `admin`
-  - **Password**: `admin`
-- Change the default password.
 
 ### **Step 1: Install OWASP Dependency-Check**
 
@@ -42,4 +31,53 @@ unzip dependency-check-8.4.0-release.zip
 
   - Name: DependencyCheck
   - Path: /home/ubuntu/dependency-check
+
+
+
+
+## **2. Configure Docker Hub in Jenkins**
+
+### **Step 1: Add Docker Hub Credentials**
+1. Go to **Jenkins Dashboard** → **Manage Jenkins** → **Manage Credentials**.
+2. Select **Global credentials** → **Add credentials**.
+3. Choose **Username & Password**.
+   - **ID**: `docker-hub-credentials`
+   - **Username**: `<your-dockerhub-username>`
+   - **Password**: `<your-dockerhub-password>`
+4. Click **Save**.
+
+
+
+## **2. Configure GitHub Integration**
+### **Step 1: Add GitHub Credentials**
+1. **Go to**: Jenkins Dashboard → **Manage Jenkins** → **Manage Credentials**.
+2. Select **Global credentials** → **Add credentials**.
+3. Choose **Username with password** or **Personal Access Token** for GitHub.
+
+
+### **Step 2: Configure GitHub Webhook**
+1. Go to your **GitHub repository** → **Settings** → **Webhooks**.
+2. Click **"Add webhook"** and enter:
+   - **Payload URL**: `http://<JENKINS_URL>/github-webhook/`
+   - **Content type**: `application/json`
+   - **Events**: Select "Just the push event".
+
+
+
+### **Step 2: Configure SonarQube in Jenkins**
+1. **Go to**: Jenkins Dashboard → **Manage Jenkins** → **Global Tool Configuration**.
+2. Find **SonarQube Scanner** → **Add SonarQube Installation**.
+3. Set:
+   - **Name**: `SonarQube`
+   - **Server URL**: `http://localhost:9000`
+   - **Authentication Token**: (Generate in SonarQube UI)
+
+
+### **Step 2: Configure Maven in Jenkins**
+1. **Go to**: Jenkins Dashboard → **Manage Jenkins** → **Global Tool Configuration**.
+2. Find **Maven** → Click **Add Maven**.
+3. Set:
+   - **Name**: `Maven`
+   - **Maven Home**: `/usr/share/maven`
+
 
