@@ -43,10 +43,6 @@ resource "aws_instance" "jenkins_server" {
     unzip awscliv2.zip
     sudo ./aws/install
 
-
-    # update credntial to update
-    aws eks update-kubeconfig --name my-eks-cluster --region us-east-1
-
     # Install eksctl
     curl -sSL "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" -o eksctl.tar.gz
     tar -xzf eksctl.tar.gz
@@ -87,6 +83,12 @@ resource "aws_instance" "jenkins_server" {
 
     # Sonarqube instal
     docker run --name sonarqube-custom -dp 9000:9000 sonarqube:community
+
+     # update credntial to update
+    aws eks update-kubeconfig --name my-eks-cluster --region us-east-1
+    sudo chown -R jenkins:jenkins /var/lib/jenkins/.kube
+    sudo chmod 600 /var/lib/jenkins/.kube/config
+
     jenkins --version
     docker --version
     terraform --version
