@@ -62,10 +62,17 @@ resource "aws_instance" "jenkins_server" {
     sudo systemctl enable --now jenkins
 
     ### **Step 1: Install Trivy**
-    sudo apt install wget apt-transport-https gnupg -y
-    wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
-    echo "deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -cs) main" | sudo tee -a /etc/apt/sources.list.d/trivy.list
+    # Add Aqua Security repository
+    sudo apt install wget -y
+    wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo tee /etc/apt/trusted.gpg.d/trivy.asc
+    echo "deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/trivy.list
+
+    # Install Trivy
     sudo apt update && sudo apt install trivy -y
+
+    # Check Trivy version
+    trivy --version
+
 
     # Start and Enable Services
     sudo systemctl enable --now jenkins
