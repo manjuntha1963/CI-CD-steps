@@ -9,7 +9,6 @@
      Pipeline: Stage View
 
 
-## **2. Configure Docker Hub in Jenkins**
 
 ### **Step 1: Add Docker Hub Credentials**
 1. Go to **Jenkins Dashboard** → **Manage Jenkins** → **Manage Credentials**.
@@ -22,7 +21,6 @@
 
 
 
-### **Step 2: Configure GitHub Webhook**
 1. Go to your **GitHub repository** → **Settings** → **Webhooks**.
 2. Click **"Add webhook"** and enter:
    - **Payload URL**: `http://54.165.163.214:8080/github-webhook/`
@@ -30,20 +28,13 @@
    - **Events**: Select "Just the push event".
 
 
-### **Step 2: Configure SonarQube in Jenkins**
 
-1. **Go to**: Jenkins Dashboard → **Manage Jenkins** → **Global Tool Configuration**.
+
+1. **Go to**: Jenkins Dashboard → **Manage Jenkins** → **Global System Configuration**.
 
    - **Name**: `SonarQube`
    - **Server URL**: `http://54.165.163.214:9000`
    - **Authentication Token**: (Generate in SonarQube UI)
 
-
-### **Step 2: Configure Maven in Jenkins**
-1. **Go to**: Jenkins Dashboard → **Manage Jenkins** → **Global Tool Configuration**.
-2. Find **Maven** → Click **Add Maven**.
-3. Set:
-   - **Name**: `Maven`
-   - **Maven Home**: `/usr/share/maven`
 
 
