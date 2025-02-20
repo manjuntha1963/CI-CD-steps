@@ -1,3 +1,20 @@
+Lets Login to the Local server or Laptop Install the package on windows 
+
+
+### Install Chocolatey to Install Terraform on Windows Server
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+choco install terraform -y
+
+terraform -version
+
+
+Lets install the Visual Studio Code on windows server 
+
+
+
+
+
 provider "aws" {
   region = "us-east-1"
 }
@@ -281,29 +298,4 @@ resource "aws_eks_node_group" "eks_nodes" {
     aws_iam_role_policy_attachment.eks_ssm_policy
   ]
 }
-
-
-Lets Login to the Local server or Laptop Install the package on windows 
-
-
-### Install Chocolatey to Install Terraform on Windows Server
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-
-choco install terraform -y
-
-terraform -version
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
